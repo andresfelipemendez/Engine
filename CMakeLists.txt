@@ -11,10 +11,17 @@ message(STATUS "Found GLFW3 in ${GLFW_INCLUDE_DIR}")
 find_package(Vulkan REQUIRED)
 message(STATUS "Found Vulkan in ${Vulkan_LIBRARIES}")
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib/stb ${CMAKE_CURRENT_SOURCE_DIR}/lib/tiny_obj_loader)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib/stb ${CMAKE_CURRENT_SOURCE_DIR}/lib/tiny_obj_loader ${CMAKE_CURRENT_SOURCE_DIR}/lib/catch2)
 include_directories(${GLFW3_INCLUDE_DIRS} ${Vulkan_INCLUDE_DIRS})
 
-add_executable(Engine src/main.cpp)
+file(GLOB SRC_FILES
+  "lib/imgui/*.cpp"
+  "lib/catch2/*.cpp"
+  "src/*.cpp"
+  "lib/sqlite/sqlite3.c"
+  
+)
+add_executable(Engine ${SRC_FILES})
 
 target_link_libraries(Engine glfw ${Vulkan_LIBRARIES})
 
