@@ -4,13 +4,14 @@
 #include <fstream>
 #include <sstream>
 #include <algorithm>
+#include <map>
 
 class Material
 {
 private:
     /* data */
 public:
-    std::vector<std::string> properties;
+    std::map<std::string, std::string> properties;
     Material(std::string materialFileName);
     ~Material();
 };
@@ -32,6 +33,7 @@ Material::Material(std::string materialFileName)
         if (key == "shader")
         {
             std::cout << "get shader:" << key << " : " << val << "\n";
+            properties.emplace(key, val);
         }
     }
 
