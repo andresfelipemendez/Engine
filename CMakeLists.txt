@@ -1,29 +1,32 @@
 cmake_minimum_required(VERSION 3.10)
 
+set(CMAKE_MODULE_PATH  ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmakeModules/")
+
 project(Engine)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-find_package(glfw3 3.3 REQUIRED)
+find_package(GLFW3 REQUIRED)
 message(STATUS "Found GLFW3 in ${GLFW_INCLUDE_DIR}")
 
 find_package(Vulkan REQUIRED)
 message(STATUS "Found Vulkan in ${Vulkan_LIBRARIES}")
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib/stb ${CMAKE_CURRENT_SOURCE_DIR}/lib/tiny_obj_loader ${CMAKE_CURRENT_SOURCE_DIR}/lib/catch2)
-include_directories(${GLFW3_INCLUDE_DIRS} ${Vulkan_INCLUDE_DIRS})
+find_package(GLM REQUIRED)
+message(STATUS "Found Vulkan in ${GLM_INCLUDE_DIR}")
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib/stb ${CMAKE_CURRENT_SOURCE_DIR}/lib/tiny_obj_loader)
+include_directories(${GLM_INCLUDE_DIRS} ${GLFW3_INCLUDE_DIR} ${GLFW3_INCLUDE_DIRS} ${Vulkan_INCLUDE_DIRS})
 
 file(GLOB SRC_FILES
-  "lib/imgui/*.cpp"
-  "lib/catch2/*.cpp"
+  # "lib/imgui/*.cpp"
   "src/*.cpp"
-  "lib/sqlite/sqlite3.c"
   
 )
 add_executable(Engine ${SRC_FILES})
 
-target_link_libraries(Engine glfw ${Vulkan_LIBRARIES})
+target_link_libraries(Engine ${GLFW3_LIBRARY} ${Vulkan_LIBRARIES})
 
 file(GLOB SHADERS
   "assets/shaders/*.spv"

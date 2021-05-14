@@ -1,16 +1,10 @@
 #include <iostream>
 
-// #include "Vulkan.h"
-#include "Material.h"
-#include "catch_amalgamated.hpp"
+ #include "Vulkan.h"
 
-int main(int argc, const char *const argv[])
+
+int main()
 {
-
-    Material m("material1.mat");
-    std::cout << m.properties[0];
-
-    /*
     HelloTriangleApplication app;
 
     try
@@ -23,6 +17,4 @@ int main(int argc, const char *const argv[])
         return EXIT_FAILURE;
     }
     return EXIT_SUCCESS;
-    */
-    return utest_main(argc, argv);
 }
