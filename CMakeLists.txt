@@ -1,20 +1,20 @@
 cmake_minimum_required(VERSION 3.10)
 
-set(CMAKE_MODULE_PATH  ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmakeModules/")
+# set(CMAKE_MODULE_PATH  ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmakeModules/")
 
 project(Engine)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-find_package(GLFW3 REQUIRED)
-message(STATUS "Found GLFW3 in ${GLFW_INCLUDE_DIR}")
+find_package(glfw3 REQUIRED)
+message(STATUS "Found GLFW3 in ${GLFW3_INCLUDE_DIRS}")
 
 find_package(assimp REQUIRED)
 message(STATUS "Found Assimp in ${ASSIMP_LIBRARIES}")
 
 find_package(GLM REQUIRED)
-message(STATUS "Found Vulkan in ${GLM_INCLUDE_DIR}")
+message(STATUS "Found GLM in ${GLM_INCLUDE_DIR}")
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib/stb ${CMAKE_CURRENT_SOURCE_DIR}/lib/tiny_obj_loader)
 include_directories(${GLFW3_INCLUDE_DIRS} ${ASSIMP_INCLUDE_DIRS})

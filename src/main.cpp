@@ -42,18 +42,6 @@ bool DoTheImportThing(const std::string &pFile)
 
 int main()
 {
-    HelloTriangleApplication app;
-
-    try
-    {
-        app.run();
-    }
-    catch (const std::exception &e)
-    {
-        std::cerr << e.what() << std::endl;
-        return EXIT_FAILURE;
-    }
-    return EXIT_SUCCESS;
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
