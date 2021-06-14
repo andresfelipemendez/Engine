@@ -10,23 +10,30 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 find_package(GLFW3 REQUIRED)
 message(STATUS "Found GLFW3 in ${GLFW_INCLUDE_DIR}")
 
-find_package(Vulkan REQUIRED)
-message(STATUS "Found Vulkan in ${Vulkan_LIBRARIES}")
+find_package(assimp REQUIRED)
+message(STATUS "Found Assimp in ${ASSIMP_LIBRARIES}")
 
 find_package(GLM REQUIRED)
 message(STATUS "Found Vulkan in ${GLM_INCLUDE_DIR}")
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib/stb ${CMAKE_CURRENT_SOURCE_DIR}/lib/tiny_obj_loader)
-include_directories(${GLM_INCLUDE_DIRS} ${GLFW3_INCLUDE_DIR} ${GLFW3_INCLUDE_DIRS} ${Vulkan_INCLUDE_DIRS})
+include_directories(${GLFW3_INCLUDE_DIRS} ${ASSIMP_INCLUDE_DIRS})
 
-file(GLOB SRC_FILES
-  # "lib/imgui/*.cpp"
-  "src/*.cpp"
-  
+file(GLOB IMGUI_SRC
+     "imgui/*.cpp"
 )
-add_executable(Engine ${SRC_FILES})
 
-target_link_libraries(Engine ${GLFW3_LIBRARY} ${Vulkan_LIBRARIES})
+add_executable(Engine src/main.cpp ${IMGUI_SRC})
+
+add_subdirectory(glad/)
+
+if (assimp_FOUND)
+    set(ASSIMP_LIBRARY "assimp")
+    add_library(${ASSIMP_LIBRARY} SHARED IMPORTED)
+    set_target_properties(${ASSIMP_LIBRARY} PROPERTIES IMPORTED_LOCATION "${ASSIMP_LIBRARY_DIRS}/libassimp.dylib")
+endif(assimp_FOUND)
+
+target_link_libraries(Engine ${ASSIMP_LIBRARY} glfw glad )
 
 file(GLOB SHADERS
   "assets/shaders/*.spv"
