@@ -1,5 +1,6 @@
 .DS_Store
-build/
+/build
+/xcode
 
 CMakeLists.txt.user
 CMakeCache.txt
@@ -13,5 +14,4 @@ compile_commands.json
 CTestTestfile.cmake
 _deps
 *.o
-/xcode
-/xcode
+

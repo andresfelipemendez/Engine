@@ -103,7 +103,7 @@ int main()
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *)0);
 	glEnableVertexAttribArray(0);
 
-	unsigned int shaderProgram = createShaderProgram("vertex.glsl", "fragment.glsl");
+	unsigned int shaderProgram = createShaderProgram("shaders/vertex.glsl", "shaders/fragment.glsl");
 
 	DoTheImportThing("assets/capsule.glb");
 
@@ -155,7 +155,7 @@ int main()
 		}
 
 		ImGui::Render();
-        
+
 		int width, height;
 		glfwGetFramebufferSize(window, &width, &height);
 		glViewport(0, 0, width, height);

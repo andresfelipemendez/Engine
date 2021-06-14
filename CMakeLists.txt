@@ -36,7 +36,7 @@ endif(assimp_FOUND)
 target_link_libraries(Engine ${ASSIMP_LIBRARY} glfw glad )
 
 file(GLOB SHADERS
-  "assets/shaders/*.spv"
+  "assets/shaders/*.glsl"
 )
 file(GLOB MODELS
   "assets/models/*.obj"
