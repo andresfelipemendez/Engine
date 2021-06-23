@@ -21,9 +21,13 @@ include_directories(${GLFW3_INCLUDE_DIRS} ${ASSIMP_INCLUDE_DIRS})
 
 file(GLOB IMGUI_SRC
      "imgui/*.cpp"
+) 
+
+file(GLOB ENGINE_SRC
+     "src/*.cpp"
 )
 
-add_executable(Engine src/main.cpp ${IMGUI_SRC})
+add_executable(Engine ${ENGINE_SRC}  ${IMGUI_SRC})
 
 add_subdirectory(glad/)
 

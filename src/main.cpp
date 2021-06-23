@@ -1,44 +1,13 @@
-#include <assimp/Importer.hpp>
-#include <assimp/scene.h>
-#include <assimp/postprocess.h>
-
 #include "../imgui/includeImgui.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
 
-#include "../include/shader.h"
+#include "Shader.h"
+#include "MeshImporter.h"
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height);
 void ProcessInput(GLFWwindow *window);
-
-bool DoTheImportThing(const std::string &pFile)
-{
-	// Create an instance of the Importer class
-	Assimp::Importer importer;
-
-	// And have it read the given file with some example postprocessing
-	// Usually - if speed is not the most important aspect for you - you'll
-	// probably to request more postprocessing than we do in this example.
-	const aiScene *scene = importer.ReadFile(pFile,
-											 aiProcess_CalcTangentSpace |
-												 aiProcess_Triangulate |
-												 aiProcess_JoinIdenticalVertices |
-												 aiProcess_SortByPType);
-
-	// If the import failed, report it
-	if (!scene)
-	{
-		std::cout << importer.GetErrorString() << std::endl;
-		return false;
-	}
-
-	// Now we can access the file's contents.
-	//DoTheSceneProcessing(scene);
-
-	// We're done. Everything will be cleaned up by the importer destructor
-	return true;
-}
 
 int main()
 {
@@ -75,6 +44,8 @@ int main()
 
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
+	DoTheImportThing("models/xyzrgb_dragon.obj");
+
 	float vertices[] = {
 		0.5f, 0.5f, 0.0f,	// top right
 		0.5f, -0.5f, 0.0f,	// bottom right
@@ -103,10 +74,8 @@ int main()
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *)0);
 	glEnableVertexAttribArray(0);
 
-	unsigned int shaderProgram = createShaderProgram("shaders/vertex.glsl", "shaders/fragment.glsl");
-
-	DoTheImportThing("assets/capsule.glb");
-
+	//unsigned int shaderProgram = createShaderProgram("shaders/vertex.glsl", "shaders/fragment.glsl");
+	Shader s("shaders/vertex.glsl", "shaders/fragment.glsl");
 	bool show_demo_window = false;
 	bool show_another_window = false;
 	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
@@ -127,16 +96,16 @@ int main()
 			static float f = 0.0f;
 			static int counter = 0;
 
-			ImGui::Begin("Hello, world!"); // Create a window called "Hello, world!" and append into it.
+			ImGui::Begin("Hello, world!");
 
-			ImGui::Text("This is some useful text.");		   // Display some text (you can use a format strings too)
-			ImGui::Checkbox("Demo Window", &show_demo_window); // Edit bools storing our window open/close state
+			ImGui::Text("This is some useful text.");
+			ImGui::Checkbox("Demo Window", &show_demo_window);
 			ImGui::Checkbox("Another Window", &show_another_window);
 
-			ImGui::SliderFloat("float", &f, 0.0f, 1.0f);			 // Edit 1 float using a slider from 0.0f to 1.0f
-			ImGui::ColorEdit3("clear color", (float *)&clear_color); // Edit 3 floats representing a color
+			ImGui::SliderFloat("float", &f, 0.0f, 1.0f);
+			ImGui::ColorEdit3("clear color", (float *)&clear_color);
 
-			if (ImGui::Button("Button")) // Buttons return true when clicked (most widgets return true when edited/activated)
+			if (ImGui::Button("Button"))
 				counter++;
 			ImGui::SameLine();
 			ImGui::Text("counter = %d", counter);
@@ -162,7 +131,8 @@ int main()
 		glClearColor(clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w, clear_color.w);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		glUseProgram(shaderProgram);
+		//glUseProgram(shaderProgram);
+		s.use();
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
