@@ -1,23 +1,17 @@
 cmake_minimum_required(VERSION 3.10)
 
-# set(CMAKE_MODULE_PATH  ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmakeModules/")
+set(CMAKE_MODULE_PATH  ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmakeModules/")
 
 project(Engine)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 find_package(glfw3 REQUIRED)
-message(STATUS "Found GLFW3 in ${GLFW3_INCLUDE_DIRS}")
-
-find_package(assimp REQUIRED)
-message(STATUS "Found Assimp in ${ASSIMP_LIBRARIES}")
-
-find_package(GLM REQUIRED)
-message(STATUS "Found GLM in ${GLM_INCLUDE_DIR}")
+find_package(GLM CONFIG REQUIRED)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib/stb ${CMAKE_CURRENT_SOURCE_DIR}/lib/tiny_obj_loader)
-include_directories(${GLFW3_INCLUDE_DIRS} ${ASSIMP_INCLUDE_DIRS})
+include_directories(${GLFW3_INCLUDE_DIRS} )
 
 file(GLOB IMGUI_SRC
      "imgui/*.cpp"
@@ -27,17 +21,11 @@ file(GLOB ENGINE_SRC
      "src/*.cpp"
 )
 
-add_executable(Engine ${ENGINE_SRC}  ${IMGUI_SRC})
+add_executable(Engine ${ENGINE_SRC}  ${IMGUI_SRC} )
 
 add_subdirectory(glad/)
 
-if (assimp_FOUND)
-    set(ASSIMP_LIBRARY "assimp")
-    add_library(${ASSIMP_LIBRARY} SHARED IMPORTED)
-    set_target_properties(${ASSIMP_LIBRARY} PROPERTIES IMPORTED_LOCATION "${ASSIMP_LIBRARY_DIRS}/libassimp.dylib")
-endif(assimp_FOUND)
-
-target_link_libraries(Engine ${ASSIMP_LIBRARY} glfw glad )
+target_link_libraries(Engine glfw glad glm::glm)
 
 file(GLOB SHADERS
   "assets/shaders/*.glsl"
