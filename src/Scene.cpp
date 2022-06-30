@@ -25,8 +25,8 @@ Scene::Scene() {
     db.sync_schema();
 
     User user;
-    user.name = "Andres";
-    user.age = 30;
+    user.name = "Julian";
+    user.age = 35;
     user.id = 1;
 
     int id = 0;
@@ -39,6 +39,7 @@ Scene::Scene() {
 
     try{
         auto users = db.get<User>(id);
+        std::cout << users.name << " " << users.age << id << std::endl;
     } catch (const std::system_error e) {
         std::cout << e.what() << std::endl;
     }

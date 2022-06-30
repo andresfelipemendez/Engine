@@ -8,8 +8,8 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 find_package(glfw3 REQUIRED)
+find_package(SqliteOrm CONFIG REQUIRED)
 find_package(GLM CONFIG REQUIRED)
-find_package(SqliteOrm REQUIRED)
 
 find_path(TINYGLTF_INCLUDE_DIRS "tiny_gltf.h")
 
@@ -35,7 +35,7 @@ file(GLOB SHADERS
   "assets/shaders/*.glsl"
 )
 file(GLOB MODELS
-  "assets/models/*.obj"
+  "assets/models/*.glb"
 )
 
 function (CopyFile ORIGINAL_TARGET FILE_PATH COPY_OUTPUT_DIRECTORY)
