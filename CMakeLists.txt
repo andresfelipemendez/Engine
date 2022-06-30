@@ -7,7 +7,7 @@ project(Engine)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-find_package(glfw3 REQUIRED)
+find_package(glfw3 CONFIG REQUIRED)
 find_package(SqliteOrm CONFIG REQUIRED)
 find_package(GLM CONFIG REQUIRED)
 

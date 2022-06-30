@@ -5,7 +5,7 @@
 #ifndef ENGINE_GLOBALS_H
 #define ENGINE_GLOBALS_H
 
-class GLFWwindow;
+struct GLFWwindow;
 
 union color {
     float f[4];

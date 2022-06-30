@@ -16,7 +16,7 @@ using namespace sqlite_orm;
 
 Scene::Scene() {
     // Create a database connection.
-    auto db = make_storage("/Users/andres/Development/Engine/cmake-build-debug/test.sqlite",
+    auto db = make_storage("test.sqlite",
                     make_table("Users",
                         make_column("id", &User::id, autoincrement(), primary_key()),
                         make_column("name", &User::name),
