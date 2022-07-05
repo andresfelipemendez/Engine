@@ -10,26 +10,24 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 find_package(glfw3 CONFIG REQUIRED)
 find_package(SqliteOrm CONFIG REQUIRED)
 find_package(GLM CONFIG REQUIRED)
+find_package(imgui CONFIG REQUIRED)
+
 
 find_path(TINYGLTF_INCLUDE_DIRS "tiny_gltf.h")
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib/stb ${CMAKE_CURRENT_SOURCE_DIR}/lib/tiny_obj_loader)
 include_directories(${GLFW3_INCLUDE_DIRS} )
 
-file(GLOB IMGUI_SRC
-     "imgui/*.cpp"
-) 
-
 file(GLOB ENGINE_SRC
      "src/*.cpp"
 )
 
-add_executable(Engine ${ENGINE_SRC}  ${IMGUI_SRC} )
+add_executable(Engine ${ENGINE_SRC}   )
 
 add_subdirectory(glad/)
 
 target_include_directories(Engine PRIVATE ${TINYGLTF_INCLUDE_DIRS})
-target_link_libraries(Engine glfw glad glm::glm sqlite_orm::sqlite_orm)
+target_link_libraries(Engine glfw glad glm::glm sqlite_orm::sqlite_orm imgui::imgui)
 
 file(GLOB SHADERS
   "assets/shaders/*.glsl"

@@ -2,7 +2,9 @@
 // Created by Andres on 27/06/22.
 //
 
-#include "../imgui/includeImgui.h"
+#include "imgui.h"
+#include "imgui_impl_glfw.h"
+#include "imgui_impl_opengl3.h"
 #include "GUI.h"
 
 #include "Globals.h"
@@ -22,6 +24,7 @@ GUI::GUI() {
 void GUI::Initialize() {
 
     const char *glsl_version = "#version 150";
+
     ImGui_ImplGlfw_InitForOpenGL(Globals::Renderer::window, true);
     ImGui_ImplOpenGL3_Init(glsl_version);
 
