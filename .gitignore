@@ -19,3 +19,4 @@ _deps
 cmake-build-debug
 .vs
 out
+vs2022
