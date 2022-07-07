@@ -1,16 +1,14 @@
 #pragma once
-#include "Shader.h"
+
+
+#include <entt/entt.hpp>
 
 class Renderer
 {
 public:
-    Shader s;
-    unsigned int EBO;
-    unsigned int VBO;
-    unsigned int VAO;
-
     Renderer();
     ~Renderer();
 
+    bool Initialize(entt::registry& registry);
     void Render();
 };

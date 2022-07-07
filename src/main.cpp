@@ -1,10 +1,13 @@
 #include <iostream>
+
+#include "PhysicsSystem.h"
+#include "RenderingSystem.h"
+
 #include "Platform.h"
 #include "Renderer.h"
 #include "GUI.h"
 #include "Scene.h"
 #include "Model.h"
-#include "PhysicsSystem.h"
 #include "Components/position.h"
 #include "Components/velocity.h"
 
@@ -16,9 +19,13 @@ int main()
     Scene scene;
     Model model;
     PhysicsSystem physicsSystem;
-    gui.Initialize();
+    RenderingSystem renderingSystem;
 
     entt::registry registry;
+
+    gui.Initialize();
+    renderingSystem.Initialize(registry);
+
     for (auto i = 0u;i<10u;++i) {
         const auto entity = registry.create();
         registry.emplace<position>(entity,i*1.f,i*1.f);
@@ -31,7 +38,9 @@ int main()
 	while (platform.isRunning()) {
         platform.Update();
         physicsSystem.update(registry);
+        
         renderer.Render();
+        renderingSystem.update(registry);
         gui.Update();
     }
 	return 0;
