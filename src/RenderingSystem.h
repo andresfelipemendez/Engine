@@ -14,7 +14,7 @@ public:
 
 	RenderingSystem();
 	bool Initialize(entt::registry& registry);
-	void update(entt::registry& registry);
+	void Update(entt::registry& registry);
 };
 
 

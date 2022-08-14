@@ -5,6 +5,8 @@
 #ifndef ENGINE_GLOBALS_H
 #define ENGINE_GLOBALS_H
 
+#include <glm/glm.hpp>
+
 struct GLFWwindow;
 
 struct vec4
@@ -22,6 +24,7 @@ union color {
 	
 };
 
+
 namespace Globals {
 
 	class Renderer {
@@ -30,6 +33,10 @@ namespace Globals {
 		static color clearColor;
 		inline static int width = 800;
 		inline static int height = 600;
+		inline static glm::vec3 cameraPos = { 0.0f, 0.0f, 3.0f };
+		inline static glm::vec3 cameraFront = { 0.0f, 0.0f, -1.0f };
+		inline static glm::vec3 cameraUp = { 0.0f, 1.0f, 0.0f };
+		
 	};
 }
 

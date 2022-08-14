@@ -2,6 +2,7 @@
 
 #include "PhysicsSystem.h"
 #include "RenderingSystem.h"
+#include "InputSystem.h"
 
 #include "Platform.h"
 #include "Renderer.h"
@@ -19,12 +20,14 @@ int main()
 	Scene scene;
 	Model model;
 	PhysicsSystem physicsSystem;
-	RenderingSystem renderingSystem;
+	RenderingSystem rs;
+	InputSystem is;
 
 	entt::registry registry;
 
 	gui.Initialize();
-	renderingSystem.Initialize(registry);
+	rs.Initialize(registry);
+	is.Initialize(registry);
 
 	for (auto i = 0u;i<10u;++i) {
 		const auto entity = registry.create();
@@ -40,7 +43,8 @@ int main()
 		physicsSystem.update(registry);
 		
 		renderer.Render();
-		renderingSystem.update(registry);
+		is.Update(registry);
+		rs.Update(registry);
 		gui.Update();
 	}
 	return 0;

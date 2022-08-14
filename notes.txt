@@ -1,0 +1,7 @@
+need to remove the instantiation fo the 
+mesh in teh renderign system constructor
+
+need to create a persistent system to store and retreive the values
+
+initialy the inputcomponent will translate the camera but later on
+should move the character as well?

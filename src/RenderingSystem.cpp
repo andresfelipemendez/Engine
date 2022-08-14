@@ -15,7 +15,6 @@ using glm::vec3;
 using glm::mat4;
 
 glm::mat4 model = glm::mat4(1.0f);
-
 glm::mat4 cameraView = glm::mat4(1.0f);
 glm::mat4 projection = glm::mat4(1.0f);
 
@@ -23,7 +22,7 @@ glm::mat4 projection = glm::mat4(1.0f);
 RenderingSystem::RenderingSystem() : 
 	s(Shader("shaders/vertex.vert", "shaders/fragment.frag")) 
 {
-	cameraView = glm::translate(cameraView, glm::vec3(0.0f, 0.0f, -3.0f));
+	
 	model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));
 	projection = glm::perspective(glm::radians(45.0f),
 		(float)Globals::Renderer::width / 
@@ -74,11 +73,15 @@ void setMatrix(Shader& shader, std::string name, glm::mat4& matrix) {
 	glUniformMatrix4fv(loc, 1, GL_FALSE, glm::value_ptr(matrix));
 }
 
-void RenderingSystem::update(entt::registry& registry)
+void RenderingSystem::Update(entt::registry& registry)
 {
 	auto view = registry.view<renderer>();
 
+	glm::vec3 eye = Globals::Renderer::cameraPos;
+	glm::vec3 center = Globals::Renderer::cameraPos + Globals::Renderer::cameraFront;
+	glm::vec3 up = Globals::Renderer::cameraUp;
 	
+	cameraView = glm::lookAt(eye,center,up);
 
 	view.each([&](const auto entity, auto& renderer) 
 	{
