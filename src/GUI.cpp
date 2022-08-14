@@ -28,9 +28,7 @@ void GUI::Initialize() {
     ImGui_ImplGlfw_InitForOpenGL(Globals::Renderer::window, true);
     ImGui_ImplOpenGL3_Init(glsl_version);
 
-
-    ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
-
+    Globals::Renderer::clearColor.v = { 0.45f, 0.55f, 0.60f, 1.00f };
 }
 
 void GUI::Update() {
@@ -52,7 +50,7 @@ void GUI::Update() {
         ImGui::Checkbox("Another Window", &show_another_window);
 
         ImGui::SliderFloat("float", &f, 0.0f, 1.0f);
-        ImGui::ColorEdit3("clear color", (float *)& Globals::Renderer::clearColor);
+        ImGui::ColorEdit4("clear color", (float *)& Globals::Renderer::clearColor.f);
 
         if (ImGui::Button("Button"))
             counter++;

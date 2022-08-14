@@ -11,7 +11,7 @@ GLFWwindow *Globals::Renderer::window;
 void Renderer::Render() {
     glViewport(0, 0, Globals::Renderer::width, Globals::Renderer::height);
     auto clear_color = Globals::Renderer::clearColor;
-    glClearColor(clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w, clear_color.w);
+    glClearColor(clear_color.v.x , clear_color.v.y , clear_color.v.z , clear_color.v.w);
     glClear(GL_COLOR_BUFFER_BIT);
 
     //s.use();
