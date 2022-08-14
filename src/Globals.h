@@ -33,9 +33,14 @@ namespace Globals {
 		static color clearColor;
 		inline static int width = 800;
 		inline static int height = 600;
+		inline static float yaw;
+		inline static float pitch;
+		inline static glm::vec3 direction;
+		inline static float lastX = width/2.0f, lastY = height / 2.0f;
 		inline static glm::vec3 cameraPos = { 0.0f, 0.0f, 3.0f };
 		inline static glm::vec3 cameraFront = { 0.0f, 0.0f, -1.0f };
 		inline static glm::vec3 cameraUp = { 0.0f, 1.0f, 0.0f };
+		inline static glm::vec3 cameraDir = { 0.0f, 1.0f, 0.0f };
 		
 	};
 }

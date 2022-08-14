@@ -5,9 +5,9 @@
 class InputSystem
 {
 private:
-	/* data */
+
 public:
-	InputSystem(/* args */);
+	InputSystem();
 	~InputSystem();
 
 	bool Initialize(entt::registry& registry);
