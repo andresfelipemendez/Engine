@@ -29,7 +29,9 @@ Platform::Platform() {
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
-    Globals::Renderer::window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL);
+    Globals::Renderer::window = glfwCreateWindow(
+        Globals::Renderer::width, 
+        Globals::Renderer::height, "LearnOpenGL", NULL, NULL);
     if (Globals::Renderer::window == NULL)
     {
         std::cout << "Failed to create GLFW window" << std::endl;
