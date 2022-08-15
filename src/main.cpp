@@ -9,6 +9,7 @@
 #include "GUI.h"
 #include "Scene.h"
 #include "Model.h"
+#include "Globals.h"
 #include "Components/position.h"
 #include "Components/velocity.h"
 
@@ -18,7 +19,7 @@ int main()
 	Renderer renderer;
 	GUI gui;
 	Scene scene;
-	Model model;
+	Model model("terrain");
 	PhysicsSystem physicsSystem;
 	RenderingSystem rs;
 	InputSystem is;
@@ -26,26 +27,33 @@ int main()
 	entt::registry registry;
 
 	gui.Initialize();
+	model.Initialize(registry);
 	rs.Initialize(registry);
 	is.Initialize(registry);
 
 	for (auto i = 0u;i<10u;++i) {
 		const auto entity = registry.create();
 		registry.emplace<position>(entity,i*1.f,i*1.f);
-		if(i %2==0){
+		if(i %2 == 0){
 			registry.emplace<velocity>(entity,i*1.f,i*1.f);
 		}
 
 	}
 
 	while (platform.isRunning()) {
+		double currentFrame = glfwGetTime();
+		Globals::Renderer::deltaTime = static_cast<float>(currentFrame - Globals::Renderer::lastFrame);
 		platform.Update();
 		physicsSystem.update(registry);
 		
 		renderer.Render();
 		is.Update(registry);
 		rs.Update(registry);
+
+		//model.Draw();
+
 		gui.Update();
+		Globals::Renderer::lastFrame = currentFrame;
 	}
 	return 0;
 }

@@ -18,6 +18,7 @@ glm::mat4 model = glm::mat4(1.0f);
 glm::mat4 cameraView = glm::mat4(1.0f);
 glm::mat4 projection = glm::mat4(1.0f);
 
+
 									   
 RenderingSystem::RenderingSystem() : 
 	s(Shader("shaders/vertex.vert", "shaders/fragment.frag")) 
@@ -33,10 +34,10 @@ RenderingSystem::RenderingSystem() :
 bool RenderingSystem::Initialize(entt::registry& registry)
 {
 	float vertices[] = {
-			0.5f, 0.5f, 0.0f,	// top right
-			0.5f, -0.5f, 0.0f,	// bottom right
-			-0.5f, -0.5f, 0.0f, // bottom left
-			-0.5f, 0.5f, 0.0f }; // top left
+			0.5f, 1.5f, 1.0f,	// top right
+			0.5f, 0.5f, 1.0f,	// bottom right
+			-0.5f, 0.5f, 1.0f, // bottom left
+			-0.5f, 1.5f, 1.0f }; // top left
 
 	unsigned int indices[] = {
 			0, 1, 3,
@@ -44,6 +45,7 @@ bool RenderingSystem::Initialize(entt::registry& registry)
 	};
 
 	const auto entity = registry.create();
+	//rendererComponent rc;
 
 	unsigned int EBO;
 	unsigned int VBO;
@@ -63,7 +65,12 @@ bool RenderingSystem::Initialize(entt::registry& registry)
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 
-	registry.emplace<renderer>(entity, EBO);
+	auto& entt = registry.emplace<rendererComponent>(entity);
+	entt.EBO = EBO;
+	entt.VBO = VBO;
+	entt.VAO = VAO;
+	entt.VAA = 0;
+	entt.triangleCount = 6;
 
 	return false;
 }
@@ -75,23 +82,35 @@ void setMatrix(Shader& shader, std::string name, glm::mat4& matrix) {
 
 void RenderingSystem::Update(entt::registry& registry)
 {
-	auto view = registry.view<renderer>();
+	auto view = registry.view<rendererComponent>();
 
 	glm::vec3 eye = Globals::Renderer::cameraPos;
 	glm::vec3 center = Globals::Renderer::cameraPos + Globals::Renderer::cameraFront;
 	glm::vec3 up = Globals::Renderer::cameraUp;
 	
-	cameraView = glm::lookAt(eye,center,up);
+	glm::mat4 cam = glm::mat4(1.0f);
+
+	cam = glm::translate(cam, Globals::Renderer::cameraPos);
+	
+	cam = glm::rotate(cam, Globals::Renderer::cameraRot.x, glm::vec3(1.0, 0.0, 0.0));
+	cam = glm::rotate(cam, Globals::Renderer::cameraRot.y, glm::vec3(0.0, 1.0, 0.0));
+	cam = glm::rotate(cam, Globals::Renderer::cameraRot.z, glm::vec3(0.0, 0.0, 1.0));
+	
+	cam = glm::inverse(cam);
 
 	view.each([&](const auto entity, auto& renderer) 
 	{
+		glBindVertexArray(renderer.VAO);
+		glBindBuffer(GL_ARRAY_BUFFER, renderer.VBO);
+		glEnableVertexAttribArray(renderer.VAA);
+
 		s.use();
 
 		setMatrix(s, "model", model);
-		setMatrix(s, "view", cameraView);
+		setMatrix(s, "view", cam);
 		setMatrix(s, "projection", projection);
 
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, renderer.EBO);
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, renderer.triangleCount, GL_UNSIGNED_INT, 0);
 	});
 }

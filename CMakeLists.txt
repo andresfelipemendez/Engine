@@ -18,11 +18,15 @@ find_path(TINYGLTF_INCLUDE_DIRS "tiny_gltf.h")
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib/stb ${CMAKE_CURRENT_SOURCE_DIR}/lib/tiny_obj_loader)
 include_directories(${GLFW3_INCLUDE_DIRS} ${GLM_INCLUDE_DIRS})
 
-file(GLOB ENGINE_SRC
+file(GLOB_RECURSE  ENGINE_HEADERS
+     "src/*.h"
+)
+
+file(GLOB_RECURSE  ENGINE_SRC
      "src/*.cpp"
 )
 
-add_executable(Engine ${ENGINE_SRC}   )
+add_executable(Engine ${ENGINE_SRC} ${ENGINE_HEADERS})
 
 add_subdirectory(glad/)
 

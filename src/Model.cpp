@@ -31,6 +31,8 @@ Model::Model() {
     if (!ret) {
         printf("Failed to parse glTF\n");
     }
+
+
 }
 
 Model::~Model() {

@@ -10,8 +10,3 @@ struct translationComponent {
     float y;
     float z;
 };
-
-struct cameraComponent
-{
-
-};

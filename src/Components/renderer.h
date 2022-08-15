@@ -10,9 +10,11 @@
 #include <glm/gtc/type_ptr.hpp>
 
 
-struct renderer {
+struct rendererComponent {
+    unsigned int triangleCount;
     unsigned int EBO;
     unsigned int VBO;
     unsigned int VAO;
+    unsigned int VAA;
 };
 #endif //ENGINE_RENDERER_H
