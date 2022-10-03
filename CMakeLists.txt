@@ -1,17 +1,15 @@
 cmake_minimum_required(VERSION 3.10)
 
-set(CMAKE_MODULE_PATH  ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmakeModules/")
-
 project(Engine)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-find_package(glfw3 CONFIG REQUIRED)
-find_package(SqliteOrm CONFIG REQUIRED)
-find_package(GLM CONFIG REQUIRED)
+find_package(EnTT CONFIG REQUIRED)
 find_package(imgui CONFIG REQUIRED)
-
+find_package(SqliteOrm CONFIG REQUIRED)
+find_package(glfw3 CONFIG REQUIRED)
+find_package(glm CONFIG REQUIRED)
 
 find_path(TINYGLTF_INCLUDE_DIRS "tiny_gltf.h")
 
@@ -31,7 +29,7 @@ add_executable(Engine ${ENGINE_SRC} ${ENGINE_HEADERS})
 add_subdirectory(glad/)
 
 target_include_directories(Engine PRIVATE ${TINYGLTF_INCLUDE_DIRS})
-target_link_libraries(Engine glfw glad glm::glm sqlite_orm::sqlite_orm imgui::imgui)
+target_link_libraries(Engine glfw glad EnTT::EnTT glm::glm sqlite_orm::sqlite_orm imgui::imgui)
 
 file(GLOB SHADERS
   "assets/shaders/*.*"

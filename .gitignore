@@ -20,3 +20,6 @@ cmake-build-debug
 .vs
 out
 vs2022
+
+vcpkg_installed
+vcpkg-manifest-install.log

@@ -19,39 +19,35 @@ int main()
 	Renderer renderer;
 	GUI gui;
 	Scene scene;
-	Model model("terrain");
+	Model model;
 	PhysicsSystem physicsSystem;
-	RenderingSystem rs;
-	InputSystem is;
+	RenderingSystem renderingSystem;
+	InputSystem inputSystem;
 
 	entt::registry registry;
 
 	gui.Initialize();
-	model.Initialize(registry);
-	rs.Initialize(registry);
-	is.Initialize(registry);
+	renderingSystem.Initialize(registry);
+	inputSystem.Initialize(registry);
 
 	for (auto i = 0u;i<10u;++i) {
 		const auto entity = registry.create();
 		registry.emplace<position>(entity,i*1.f,i*1.f);
-		if(i %2 == 0){
+		if(i %2==0){
 			registry.emplace<velocity>(entity,i*1.f,i*1.f);
 		}
 
 	}
 
 	while (platform.isRunning()) {
-		double currentFrame = glfwGetTime();
-		Globals::Renderer::deltaTime = static_cast<float>(currentFrame - Globals::Renderer::lastFrame);
+		float currentFrame = glfwGetTime();
+		Globals::Renderer::deltaTime = currentFrame - Globals::Renderer::lastFrame;
 		platform.Update();
 		physicsSystem.update(registry);
 		
 		renderer.Render();
-		is.Update(registry);
-		rs.Update(registry);
-
-		//model.Draw();
-
+		inputSystem.Update(registry);
+		renderingSystem.Update(registry);
 		gui.Update();
 		Globals::Renderer::lastFrame = currentFrame;
 	}
