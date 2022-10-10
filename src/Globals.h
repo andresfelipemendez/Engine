@@ -24,7 +24,7 @@ union color {
 	
 };
 
-
+ 
 namespace Globals {
 
 	class Renderer {

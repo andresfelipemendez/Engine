@@ -19,7 +19,7 @@ int main()
 	Renderer renderer;
 	GUI gui;
 	Scene scene;
-	Model model;
+	ModelSystem modelSystem;
 	PhysicsSystem physicsSystem;
 	RenderingSystem renderingSystem;
 	InputSystem inputSystem;
@@ -28,6 +28,7 @@ int main()
 
 	gui.Initialize();
 	renderingSystem.Initialize(registry);
+	modelSystem.Initialize(registry);
 	inputSystem.Initialize(registry);
 
 	for (auto i = 0u;i<10u;++i) {
@@ -40,8 +41,8 @@ int main()
 	}
 
 	while (platform.isRunning()) {
-		float currentFrame = glfwGetTime();
-		Globals::Renderer::deltaTime = currentFrame - Globals::Renderer::lastFrame;
+		double currentFrame = glfwGetTime();
+		Globals::Renderer::deltaTime = static_cast<float>( currentFrame - Globals::Renderer::lastFrame);
 		platform.Update();
 		physicsSystem.update(registry);
 		

@@ -16,5 +16,9 @@ struct rendererComponent {
     unsigned int VBO;
     unsigned int VAO;
     unsigned int VAA;
+    int type;
+    int mode;
+    size_t offset;
 };
 #endif //ENGINE_RENDERER_H
+

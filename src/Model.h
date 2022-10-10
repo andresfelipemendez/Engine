@@ -5,11 +5,31 @@
 #ifndef ENGINE_MODEL_H
 #define ENGINE_MODEL_H
 
+#include <vector>
 
-class Model {
-    public:
-    Model();
-    ~Model();
+#include <entt/entt.hpp>
+
+struct meshComponent
+{
+    int vao;
+    int vbo;
+    int ebo;
+    int vaa;
+    int mode;
+    size_t count;
+    int type;
+    size_t offset;
+};
+
+class ModelSystem 
+{
+public:
+    std::vector<meshComponent> meshes;
+    ModelSystem();
+    ~ModelSystem();
+    void Initialize(entt::registry& registry);
+private:
+    
 };
 
 

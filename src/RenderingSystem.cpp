@@ -18,7 +18,7 @@ glm::mat4 model = glm::mat4(1.0f);
 glm::mat4 cameraView = glm::mat4(1.0f);
 glm::mat4 projection = glm::mat4(1.0f);
 
-
+#define BUFFER_OFFSET(i) ((char *)NULL + (i))
 									   
 RenderingSystem::RenderingSystem() : 
 	s(Shader("shaders/vertex.vert", "shaders/fragment.frag")) 
@@ -33,45 +33,46 @@ RenderingSystem::RenderingSystem() :
 
 bool RenderingSystem::Initialize(entt::registry& registry)
 {
-	float vertices[] = {
-			0.5f, 1.5f, 1.0f,	// top right
-			0.5f, 0.5f, 1.0f,	// bottom right
-			-0.5f, 0.5f, 1.0f, // bottom left
-			-0.5f, 1.5f, 1.0f }; // top left
+	//float vertices[] = {
+	//		0.5f, 1.5f, 1.0f,	// top right
+	//		0.5f, 0.5f, 1.0f,	// bottom right
+	//		-0.5f, 0.5f, 1.0f, // bottom left
+	//		-0.5f, 1.5f, 1.0f }; // top left
 
-	unsigned int indices[] = {
-			0, 1, 3,
-			1, 2, 3 
-	};
+	//unsigned int indices[] = {
+	//		0, 1, 3,
+	//		1, 2, 3 
+	//};
 
-	const auto entity = registry.create();
-	//rendererComponent rc;
+	//const auto entity = registry.create();
+	////rendererComponent rc;
 
-	unsigned int EBO;
-	unsigned int VBO;
-	unsigned int VAO;
+	//unsigned int EBO;
+	//unsigned int VBO;
+	//unsigned int VAO;
 
-	glGenBuffers(1, &EBO);
-	glGenBuffers(1, &VBO);
-	glGenVertexArrays(1, &VAO);
+	//glGenBuffers(1, &EBO);
+	//glGenBuffers(1, &VBO);
+	//glGenVertexArrays(1, &VAO);
 
-	glBindVertexArray(VAO);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	//glBindVertexArray(VAO);
+	//glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	//glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);
+	//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	//glEnableVertexAttribArray(0);
 
-	auto& entt = registry.emplace<rendererComponent>(entity);
-	entt.EBO = EBO;
-	entt.VBO = VBO;
-	entt.VAO = VAO;
-	entt.VAA = 0;
-	entt.triangleCount = 6;
-
+	//auto& entt = registry.emplace<rendererComponent>(entity);
+	//entt.EBO = EBO;
+	//entt.VBO = VBO;
+	//entt.VAO = VAO;
+	//entt.VAA = 0;
+	//entt.triangleCount = 6;
+	//entt.type = GL_UNSIGNED_INT;
+	//entt.offset = 0;
 	return false;
 }
 
@@ -111,6 +112,6 @@ void RenderingSystem::Update(entt::registry& registry)
 		setMatrix(s, "projection", projection);
 
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, renderer.EBO);
-		glDrawElements(GL_TRIANGLES, renderer.triangleCount, GL_UNSIGNED_INT, 0);
+		glDrawElements(renderer.mode, renderer.triangleCount, renderer.type, BUFFER_OFFSET(renderer.offset));
 	});
 }
