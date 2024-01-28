@@ -13,7 +13,15 @@ I've implemented versions of the previous API in other projects, but not multipl
 - [Vulkan](https://github.com/andresfelipemendez/VulkanTesting)
 - [Direct3D](https://github.com/andresfelipemendez/DODE)
 
-Eventually I plan to refactor to a Data Oriented Design architecture, which I've done in [preivous projects](https://github.com/andresfelipemendez/C-D3D11-Engine)
+install cmake
+install vcpkg
+https://vcpkg.io/en/getting-started
+
+run vcpkg to install dependencies before the first time you run cmake
+
+```
+vcpkg install
+```
 
 ```
 cmake .. -DCMAKE_TOOLCHAIN_FILE="C:/Users/fmend/vcpkg/scripts/buildsystems/vcpkg.cmake" -G "Visual Studio 17"
