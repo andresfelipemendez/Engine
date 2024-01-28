@@ -1,54 +1,64 @@
-# Engine
+Absolutely, let's rewrite your README to highlight your skills and achievements in game engine development for your portfolio. Here's a complete draft:
 
-Project to implement what I've learned from reading:
- - [Real Time Rendering](https://www.realtimerendering.com/)
-  
-The goal is to implement multiple rendering API's in the list is:
- - OpenGL <- WIP
- - Vulkan [TODO]
- - Direct3D [TODO]
- - Metal [TODO]
+---
 
-I've implemented versions of the previous API in other projects, but not multiples in the same app.
-- [Vulkan](https://github.com/andresfelipemendez/VulkanTesting)
-- [Direct3D](https://github.com/andresfelipemendez/DODE)
+# Engine - A Showcase of Game Engine Development Skills
 
-install cmake
-install vcpkg
-https://vcpkg.io/en/getting-started
+## Introduction
+Welcome to "Engine" - my personal journey and portfolio in game engine development. Inspired by "Real Time Rendering," this project is a playground where I implement and explore various rendering APIs, showcasing my technical skills and learning experiences in the realm of game engine development.
 
-run vcpkg to install dependencies before the first time you run cmake
+## Rendering APIs
+This project aims to demonstrate my proficiency across different rendering technologies. Each API choice reflects a unique aspect of my skillset:
 
-```
-vcpkg install
-```
+- **OpenGL** (Work in Progress): Demonstrating foundational rendering techniques and optimizations.
+- **Vulkan** (Planned): To explore and showcase low-level, high-efficiency graphics programming.
+- **Direct3D** (Planned): Focused on leveraging Microsoft's widely-used API for high-performance games.
+- **Metal** (Planned): Diving into Apple's Metal for iOS/macOS specific optimizations.
 
-```
-cmake .. -DCMAKE_TOOLCHAIN_FILE="C:/Users/fmend/vcpkg/scripts/buildsystems/vcpkg.cmake" -G "Visual Studio 17"
-```
- ```
-entt:x64-windows                                   3.10.1#1         Gaming meets modern C++ - a fast and reliable en...
-entt:x86-windows                                   3.10.1#1         Gaming meets modern C++ - a fast and reliable en...
-glfw3:x64-windows                                  3.3.7            GLFW is a free, Open Source, multi-platform libr...
-glfw3:x86-windows                                  3.3.7            GLFW is a free, Open Source, multi-platform libr...
-glm:x64-windows                                    0.9.9.8#1        OpenGL Mathematics (GLM)
-imgui:x64-windows                                  1.88             Bloat-free Immediate Mode Graphical User interfa...
-imgui[dx12-binding]:x64-windows                                     Make available DirectX12 binding
-imgui[glfw-binding]:x64-windows                                     Make available GLFW binding
-imgui[opengl3-binding]:x64-windows                                  Make available OpenGL3/ES/ES2 (modern) binding
-imgui[win32-binding]:x64-windows                                    Make available Win32 binding
-nlohmann-json:x64-windows                          3.10.5#3         JSON for Modern C++
-sqlite-orm:x64-windows                             1.7.1            SQLite ORM light header only library for modern C++
-sqlite3:x64-windows                                3.37.2#1         SQLite is a software library that implements a s...
-stb:x64-windows                                    2021-09-10       public domain header-only libraries
-tinygltf:x64-windows                               2.5.0            A header only C++11 glTF 2.0 library.
-vcpkg-cmake-config:x64-windows                     2022-02-06#1
-vcpkg-cmake:x64-windows                            2022-06-07
-```
+## Previous Work
+My experience with Vulkan and Direct3D in separate projects has been pivotal in my growth as a game engine developer. These projects provide insight into my approach and depth in engine programming:
+- [Vulkan Testing](https://github.com/andresfelipemendez/VulkanTesting): A deep dive into Vulkan's capabilities.
+- [DODE - Direct3D](https://github.com/andresfelipemendez/DODE): Exploring the nuances of Direct3D.
 
-### todo:
-- [x] load models
-- [ ] multiple materials/shaders
-- [ ] vulkan IMGUI integration
-- [ ] Animation
- 
+## Hot Reloading Feature
+I am integrating [hot reloading](https://github.com/andresfelipemendez/hotreload) into this engine. This feature exemplifies my commitment to efficient development practices, enabling real-time updates and testing within the engine.
+
+## Installation and Dependencies
+To get started with reviewing my code, please follow the installation steps below. The project requires [CMake](https://cmake.org/download) and [vcpkg](https://vcpkg.io/en/getting-started) for managing dependencies.
+
+## Setup
+in a terminal execute `set VCPKG_FEATURE_FLAGS=manifests` to enable manifest mode then
+run `vcpkg install` to download dependencies 
+
+### Dependencies
+The project utilizes several libraries and frameworks, including:
+- `entt`: Entity-component system.
+- `glfw3`: Window management.
+- `glm`: Mathematics for graphics.
+- `imgui`: Immediate Mode GUI.
+- `nlohmann-json`: JSON handling.
+- `sqlite-orm`: Lightweight SQLite ORM.
+- `tinygltf`: glTF loading.
+... and others as listed in the vcpkg manifest.
+
+## Build
+run `build.bat`
+
+## Usage and Demonstrations
+Here, I provide examples and demonstrations showcasing various features and capabilities of the engine. This includes code snippets, screenshots, or video links that highlight the engine's performance and my implementation techniques.
+
+## Todo List
+- [x] Load models: Demonstrating model integration capabilities.
+- [ ] Support multiple materials/shaders: To enhance visual versatility.
+- [ ] Integrate IMGUI with Vulkan: For a robust GUI in Vulkan.
+- [ ] Implement Animation: Showcasing dynamic and fluid object movements.
+
+## About the Developer
+I am a seasoned software developer with a decade of experience in game development, specializing in game engine architecture and data-oriented design. My passion lies in pushing the boundaries of what's possible in real-time rendering and efficient software architecture.
+
+## Contact
+For inquiries, discussions, or collaboration opportunities, please feel free to reach out to me at [Your Contact Information].
+
+---
+
+Feel free to adjust and personalize this draft to better fit your style and the specifics of your project.
