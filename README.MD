@@ -1,7 +1,3 @@
-Absolutely, let's rewrite your README to highlight your skills and achievements in game engine development for your portfolio. Here's a complete draft:
-
----
-
 # Engine - A Showcase of Game Engine Development Skills
 
 ## Introduction
@@ -58,7 +54,3 @@ I am a seasoned software developer with a decade of experience in game developme
 
 ## Contact
 For inquiries, discussions, or collaboration opportunities, please feel free to reach out to me at [Your Contact Information].
-
----
-
-Feel free to adjust and personalize this draft to better fit your style and the specifics of your project.
