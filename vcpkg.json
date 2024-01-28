@@ -20,6 +20,5 @@
         "name": "glfw3",
         "version": "3.3.2"
       }
-    ],
-    "builtin-baseline": "a291bcad8093f9f17988fe66543aefd674812f0e"
+    ]
   }
