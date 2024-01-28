@@ -53,6 +53,20 @@ jobs:
       shell: bash
       run: |
         echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
+        
+    - name: Checkout vcpkg
+      uses: actions/checkout@v3
+      with:
+        repository: 'microsoft/vcpkg'
+        path: 'vcpkg'
+
+    - name: Bootstrap vcpkg
+      run: |
+        ./vcpkg/bootstrap-vcpkg.sh
+
+    - name: Install dependencies
+      run: |
+        ./vcpkg/vcpkg install --triplet ${{ matrix.build-triplet }} --manifest-mode
 
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
